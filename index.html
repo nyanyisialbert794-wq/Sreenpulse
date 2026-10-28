@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0f">
+  <meta name="description" content="ScreenPulse — discover TV shows, episodes, entertainment stories and what's worth watching next.">
+  <title>ScreenPulse — What's next on screen?</title>
+  <link rel="preconnect" href="https://api.tvmaze.com">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement"><span class="live-dot"></span> YOUR ENTERTAINMENT RADAR <span class="announcement-muted">· Updated from public data sources</span></div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="ScreenPulse home"><span class="brand-mark">S<span>•</span></span><span>SCREEN<span class="brand-accent">PULSE</span></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#discover">Discover</a>
+      <a href="#shows">TV Shows</a>
+      <a href="#schedule">On Today</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="icon-button" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR DAILY ENTERTAINMENT GUIDE</div>
+        <h1>WHAT'S NEXT<br>ON <span>SCREEN?</span></h1>
+        <p class="hero-text">Discover shows to binge, track upcoming episodes, and find your next obsession.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#discover">Explore shows <span>↗</span></a>
+          <a class="button button-ghost" href="#schedule">Today's schedule</a>
+        </div>
+        <div class="hero-meta"><span class="live-dot"></span><span id="lastUpdated">Connecting to live TV data…</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-screen"><div class="screen-glow"></div><div class="play-symbol">▶</div><div class="screen-caption">YOUR NEXT<br><b>FAVOURITE</b></div></div>
+        <div class="floating-tag tag-top">NEW EPISODES</div>
+        <div class="floating-tag tag-bottom"><span class="tag-dot"></span> WATCHLIST WORTHY</div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Site features">
+      <span>FIND YOUR NEXT FAVOURITE</span><b>✳</b><span>TV DISCOVERY</span><b>✳</b><span>EPISODE TRACKING</span><b>✳</b><span>POP CULTURE ENERGY</span>
+    </section>
+
+    <section class="section" id="discover">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE DISCOVERY DESK</div><h2>Find your <span>next watch.</span></h2></div>
+        <p>Search the TVmaze catalogue for shows, genres, and familiar faces.</p>
+      </div>
+      <form class="search-form" id="searchForm">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="search" placeholder="Search shows — try 'The Office' or 'drama'…" autocomplete="off" aria-label="Search TV shows">
+        <button class="button button-primary" type="submit">Search</button>
+      </form>
+      <div class="chips" id="genreChips">
+        <button class="chip selected" data-query="popular">Popular picks</button>
+        <button class="chip" data-query="comedy">Comedy</button>
+        <button class="chip" data-query="drama">Drama</button>
+        <button class="chip" data-query="science fiction">Sci-fi</button>
+        <button class="chip" data-query="crime">Crime</button>
+        <button class="chip" data-query="animation">Animation</button>
+      </div>
+      <div class="result-note" id="resultNote">Loading recommendations…</div>
+      <div class="show-grid" id="showGrid" aria-live="polite">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </div>
+      <div class="center-action"><button class="button button-ghost" id="loadMore">Load more shows <span>＋</span></button></div>
+    </section>
+
+    <section class="schedule-section" id="schedule">
+      <div class="section-heading">
+        <div><div class="eyebrow">DON'T MISS A MOMENT</div><h2>On the <span>schedule.</span></h2></div>
+        <p>TV episodes listed for today. Schedule availability varies by country and broadcaster.</p>
+      </div>
+      <div class="schedule-toolbar">
+        <label for="countrySelect">Schedule country</label>
+        <select id="countrySelect">
+          <option value="US">United States</option><option value="GB">United Kingdom</option><option value="KE">Kenya</option><option value="CA">Canada</option><option value="AU">Australia</option><option value="IN">India</option>
+        </select>
+        <span id="scheduleDate"></span>
+      </div>
+      <div id="scheduleList" class="schedule-list"><div class="schedule-empty">Loading today's schedule…</div></div>
+    </section>
+
+    <section class="editorial-section" id="about">
+      <div class="editorial-icon">✦</div>
+      <div><div class="eyebrow">BUILT FOR THE CURIOUS</div><h2>Entertainment moves fast.<br><span>Stay in the loop.</span></h2><p>ScreenPulse is an independent entertainment discovery project. Browse show information and episode schedules, then follow the source links for more details.</p></div>
+      <div class="editorial-side"><div class="stat"><strong>01</strong><span>Search shows</span></div><div class="stat"><strong>02</strong><span>Track episodes</span></div><div class="stat"><strong>03</strong><span>Find a new favourite</span></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="#"><span class="brand-mark">S<span>•</span></span><span>SCREEN<span class="brand-accent">PULSE</span></span></a>
+    <p>Discover what's next. Watch what you love.</p>
+    <div class="footer-bottom"><span>© <span id="year"></span> ScreenPulse · Independent fan discovery project</span><span>TV data provided by <a href="https://www.tvmaze.com/" target="_blank" rel="noopener noreferrer">TVmaze</a></span></div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
